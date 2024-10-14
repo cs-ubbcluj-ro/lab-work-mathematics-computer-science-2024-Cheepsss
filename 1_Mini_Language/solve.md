@@ -1,4 +1,4 @@
-### Lab 1 mini-language :D
+# Lab 1 mini-language :D
 Model program: C++
 
 
@@ -12,15 +12,15 @@ Contains:
 - some condition on the way the identifiers and constants can be formed
 
 ## a) Mini-language specification
-# Language specification:
+### Language specification:
   Alphabet
-    <letter> := <lwr_letter> | <upr_letter>
-    <lwr_letter> := a | b | c | d | ... | z
-    <upr_letter> := A | B | C | D | ... | Z
+    * <letter> := <lwr_letter> | <upr_letter>
+    * <lwr_letter> := a | b | c | d | ... | z
+    * <upr_letter> := A | B | C | D | ... | Z
     
-    <digit> := 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+    * <digit> := 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
     
-    <underline_chr> := _
+    * <underline_chr> := _
   Lexic
     <cond_operator> := < | <= | > | >= | == | != 
     <arithmetic_operator> := + | - | * | /
