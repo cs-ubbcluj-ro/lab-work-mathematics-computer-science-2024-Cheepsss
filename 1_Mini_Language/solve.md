@@ -60,7 +60,7 @@ Contains:
 
     <add_enclose_r> ::= <if_operator><enclose><add_enclose_r> | ε
     <add_enclose_l> ::=  <enclose><if_operator><add_enclose_l> | ε
-    <if_statement> ::= "(<add_enclose_l>"<enclose>"<add_enclose_r>)" | <condition><add_cond>
+    <if_statement> ::= "(<add_enclose_l>"<if_statement>"<add_enclose_r>)" | <condition><add_cond>
     
     la operatiile aritmetice ar fi fost aceeasi idee in cazul in care as fi vrut sa introduc parantezele, dar am ales sa le las simple :(
     <operation> ::= <operand><add_operation>
@@ -122,7 +122,7 @@ Contains:
 ```
   Code block
 ```
-  <instruction> ::= <if> | <while>
+  <instruction> ::= <if> | <while> | <cin> | <cout>
   <instruction_block> ::= <instrucion> <instruction_block> | <instruction>
 
   <code> ::= <instruction_block> | <declaration_block>
@@ -161,3 +161,74 @@ Contains:
 ## DOCUMENTATION  
 ![image](https://github.com/user-attachments/assets/35edcaa2-2c5a-40cb-96e6-e2f3bceb855c)
 nu stiu ce sa pun in docomentatie
+
+```c++
+  int main(){
+    <code_block>
+  }
+```
+```c++
+    int main(){
+    int n; //instruction
+    <code_block>
+```
+```c++
+int main(){
+    int n; //declaration block
+    cout<<"Please enter n:"<<"\n"; //instrucion
+    cin>>n; // instruction
+    if(n<0) // instrucion
+    {
+      <code_block>
+    }
+    while(n>0) //instruction
+    {
+      if(n%2==1) //instruction
+      {
+        <code_block>
+      }
+      n = n/2; <declaration_block>
+    }
+  }
+```
+```c++
+int main(){
+    int n; //declaration
+    cout<<"Please enter n:"<<"\n"; //instruction 
+    cin>>n; //instruction
+    if(n<0) //instruction
+    {
+      cout>>"Please enter an natural number">>"\n"; //instruction
+    }
+    while(n>0)  //instruction
+    {
+      if(n%2==1)  //instruction
+      {
+        cout<<n<<"\n"; //instruction
+      }
+      n = n/2;  //declaration
+    }
+  }
+```
+
+```c++
+int main(){
+    int n; //declaration -> <decl_var>; -> <int_var>; -> int <id>; -> int n;
+    cout<<"Please enter n:"<<"\n"; //<instruction> --> <cout> --> cout<<"..."<cout_add>; -> cout<<"..."<<"...";
+    cin>>n; //<instruction>
+    if(n<0) //<instruction>
+    {
+      cout>>"Please enter an natural number">>"\n"; //<instruction>
+    }
+    while(n>0)  //<instruction>
+    {
+      if(n%2==1)  //<instruction> -> <if> -> if<if_statement>{<code_block>} -> if(<condition><add_cond>) .. ->if(n%2==1)
+      {
+        cout<<n<<"\n"; //<instruction> -> <cout> ->cout<< <id><cout_add> ->  cout<<n<< <enter>; -> cout<<n<<\n";
+      }
+      n = n/2;  //<declaration> -> <assignment_existing> -> <id>=<operation> -> n=<id><operator><constant>-> n=n/2
+    }
+  }
+```
+
+
