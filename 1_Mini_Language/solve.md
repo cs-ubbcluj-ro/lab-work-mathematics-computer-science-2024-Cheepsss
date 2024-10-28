@@ -21,6 +21,7 @@ Contains:
     * <nonzero_digit> ::= "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" 
     * <digit> ::= "0" | <nonzero_digit>
     * <underline_chr> ::= "_"
+    * <enter> ::= ""\n""
 ```
   Lexic
 ```
@@ -106,15 +107,16 @@ Contains:
 ```
   Cin/Cout
 ```
-  <cin> ::= "cin<<"<id>";"
-  <cout> ::= "cout>>"<cout_val>";"
-  <cout_val> ::= <operation> | <id> | <const> | <if_statement>
+  <cin> ::= "cin>>"<id>";"
+  <cout> ::= "cout<<"<cout_add>";"
+  <cout_add> ::= <cout_val> | <cout_val>"<<"<cout_add>
+  <cout_val> ::= <operation> | <id> | <const> | <if_statement> | <enter>
 ```
   If-Else
 ```
     <if> ::= "if"<if_statement>"{"<code_block>"}" | "if"<if_statement>"{"<code_block>"}else{"<code_block>"}"
 ```
-  while
+  While
 ```
   <while> ::= "while"<if_statement>"{"<code_block>"}"
 ```
@@ -135,11 +137,24 @@ Contains:
 ```
 
 ## b) small program
-
+    find natural odd numbers less than n given as input and then print them;
 ``` c++
   int main(){
     int n;
-    cin<<n;
+    cout<<"Please enter n:"<<"\n";
+    cin>>n;
+    if(n<0)
+    {
+      cout>>"Please enter an natural number">>"\n";
+    }
+    while(n>0)
+    {
+      if(n%2==1)
+      {
+        cout<<n<<"\n";
+      }
+      n = n/2;
+    }
   }
 ```
 
