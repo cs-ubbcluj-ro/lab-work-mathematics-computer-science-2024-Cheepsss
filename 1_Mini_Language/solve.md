@@ -27,7 +27,7 @@ Contains:
     <cond_operator> ::= "<" | "<=" | ">" | ">=" | "==" | "!="
     <if_operator> ::= "||" | "&&"
     <not_operator> ::= "!"
-    <ari_operator> ":= "+" | "-" | "*" | "/"
+    <ari_operator> ":= "+" | "-" | "*" | "/" | "%"
     <logic_operator> ::= "^" | "|" | "<<"
     <separators> ::= "[" | "]" | "{" | "}"  | "(" | ")" | ";" | " " 
     <reserved_words> ::= "int" | "string" | "struct" | "char" | "if" | "else" | "while"
@@ -70,27 +70,38 @@ Contains:
 ```
     <declaration_block> ::= <declaration> | <declaration><declaration_block>
     
-    <int_var> := "int "<id>
-    <int_const> := <integer>
+    <int_var> ::= "int "<id>
+    <int_const> ::= <integer>
 
-    <str_var> := "char * "<id>
-    <str_cont> := """<string>"""
+    <str_var> ::= "char * "<id>
+    <str_cont> ::= """<string>"""
 
-    <chr_var> := "char "<id>
-    <chr_const> := "'"<char>"'"
+    <chr_var> ::= "char "<id>
+    <chr_const> ::= "'"<char>"'"
 
-    <decl_var> := <int_var> | <str_var> | <chr_var>
-    <const> := <int_const> | <str_const> | <chr_const>
 
-    <assignment> := <id>"="<assignment_val>";"
+    <decl_var_no_array> ::= <int_var> | <str_var> | <chr_var>
+    <const_no_array> ::= <int_const> | <str_const> | <chr_const>
 
-    <assignment_val> := <const> | <operation>
+    <array_access> ::= "["<number>|<id>"]"
+    <array_var> ::= <decl_var><array_accesss>
+    <array_const> ::= "{"<array_const_body>"}"
+    <array_const_body> ::= <const>","<array_const_body> | ε
+    <array_assignment> ::= <array_var>"="array_const";
+
+
+    <decl_var> ::= <array_var> | <decl_var_no_array>
+    <const> ::= <const_no_array> | <array_body>
+
+    <assignment> ::= <id>"="<assignment_val>";"
+
+    <assignment_val> ::= <const> | <operation> | <array_assignment>
     <assignment_and_decl> ::= <decl_var>"="<assignment_val>";"
     <assignment_existing> ::= <id>"="<assignment_val>";"
 
     <struct_decl> ::= struct { <declaration_block> } <id>;
 
-    <declaration> ::= <struct_decl> | <decl_var>";" | <assignment_existing> | <assignment_and_decl>
+    <declaration> ::= <struct_decl> | <decl_var>";" | <assignment_existing> | <assignment_and_decl> |
 
 ```
   Cin/Cout
