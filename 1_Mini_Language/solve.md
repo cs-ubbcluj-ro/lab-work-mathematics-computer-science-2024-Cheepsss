@@ -9,7 +9,7 @@ Contains:
 - input/output ``` cin, cout ```
 - conditional ``` if else ```
 - loop ``` while ```
-- some condition on the way the identifiers and constants can be formed
+- some condition on the way the identifiers and constants can be formed ``` avem ```
 
 ## a) Mini-language specification
 ### Language specification:
