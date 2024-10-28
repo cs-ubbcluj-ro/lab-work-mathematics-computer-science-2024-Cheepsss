@@ -24,7 +24,9 @@ Contains:
 ```
   Lexic
 ```
-    <cond_operator> ::= "<" | "<=" | ">" | ">=" | "==" | "!=" 
+    <cond_operator> ::= "<" | "<=" | ">" | ">=" | "==" | "!="
+    <if_operator> ::= "||" | "&&"
+    <not_operator> ::= "!"
     <ari_operator> ":= "+" | "-" | "*" | "/"
     <logic_operator> ::= "^" | "|" | "<<"
     <separators> ::= "[" | "]" | "{" | "}"  | "(" | ")" | ";" | " " 
@@ -45,44 +47,89 @@ Contains:
 ```
   Operation
 ```
-    <nostr_operand> :=  <id> | <chr_const> | <int_const>
-    <operand> := <id> | <const>
+    <operand> ::= <id> | <const>
 
-    <val_operator> := <ari_operator> | <logic_operator>
-    <val_operation> := <nostr_operand><ari_op_body>
-    <val_op_body> := <val_operator><nostr_operand><ari_op_body>|<val_operator><nostr_operand>
+    <condition> ::= "("<operand><logic_operator><operand>")"
 
-    <logic_operation> := <operand><logic_op_body>
-    <logic_op_body> := <logic_operator><operand><logic_op_body>|<logic_operator><operand>
-```
-Declarations 
-```
-    <declaration> := <int_decl> | <str_decl> | <chr_decl> | <struct_decl>
-    <declaration_block> := <declaration> | <declaration><declaration_block>
+
+    <add_cond_r> ::= <if_operator><condition><add_cond>| ε
+    <add_cond_l> ::= <condition><if_operator><add_cond>| ε
+    <enclose> ::= "(<add_cond_l>"<enclose>"<add_cond_r>)" | <add_cond_l><condition><add_cond_r>
+    ex enclose:((..(cond||...||cond)..)||cond||cond)..), ex cond: a<b
+
+    <add_enclose_r> ::= <if_operator><enclose><add_enclose_r> | ε
+    <add_enclose_l> ::=  <enclose><if_operator><add_enclose_l> | ε
+    <if_statement> ::= "(<add_enclose_l>"<enclose>"<add_enclose_r>)" | <condition><add_cond>
     
-    <int_var> := int <id>
+    la operatiile aritmetice ar fi fost aceeasi idee in cazul in care as fi vrut sa introduc parantezele, dar am ales sa le las simple :(
+    <operation> ::= <operand><add_operation>
+    <add_operation> ::= <operator><operand><add_operation> | ε
+  
+```
+  Declarations & Variable assignments
+```
+    <declaration_block> ::= <declaration> | <declaration><declaration_block>
+    
+    <int_var> := "int "<id>
     <int_const> := <integer>
-    <int_decl> := <int_var>; | <int_var>=<int_const>;
 
-    <str_var> := char * <id>
-    <str_cont> := "<string>"
-    <str_decl> := <str_var>; | <str_var>=<str_const>;
+    <str_var> := "char * "<id>
+    <str_cont> := """<string>"""
 
-    <chr_var> := char <id>
-    <chr_const> := '<char>'
-    <chr_decl> := <chr_var>; | <chr_var>=<chr_const>;
+    <chr_var> := "char "<id>
+    <chr_const> := "'"<char>"'"
 
+    <decl_var> := <int_var> | <str_var> | <chr_var>
     <const> := <int_const> | <str_const> | <chr_const>
-    <assignment> := <id>=<assignment_val>;
-    <assignment_val> := <const> | <operation>
 
-    <struct_decl> := struct { <declaration_block> } <id>;
+    <assignment> := <id>"="<assignment_val>";"
+
+    <assignment_val> := <const> | <operation>
+    <assignment_and_decl> ::= <decl_var>"="<assignment_val>";"
+    <assignment_existing> ::= <id>"="<assignment_val>";"
+
+    <struct_decl> ::= struct { <declaration_block> } <id>;
+
+    <declaration> ::= <struct_decl> | <decl_var>";" | <assignment_existing> | <assignment_and_decl>
 
 ```
+  Cin/Cout
+```
+  <cin> ::= "cin<<"<id>";"
+  <cout> ::= "cout>>"<cout_val>";"
+  <cout_val> ::= <operation> | <id> | <const> | <if_statement>
+```
+  If-Else
+```
+    <if> ::= "if"<if_statement>"{"<code_block>"}" | "if"<if_statement>"{"<code_block>"}else{"<code_block>"}"
+```
+  while
+```
+  <while> ::= "while"<if_statement>"{"<code_block>"}"
+```
+  Code block
+```
+  <instruction> ::= <if> | <while>
+  <instruction_block> ::= <instrucion> <instruction_block> | <instruction>
 
-    
-
+  <code> ::= <instruction_block> | <declaration_block>
+  <code_block> ::= <code><code_block> | <code>
+```
+  Program
+```
+    <library_decl> ::= ... | ε
+    <namespace_decl> ::= ... | ε
+    ...
+    <Start> ::= "int main(){"<code_block>"}"
+```
 
 ## b) small program
+
+``` c++
+  int main(){
+    int n;
+    cin<<n;
+  }
+```
 
 ## DOCUMENTATION  
