@@ -1,4 +1,4 @@
-# Lab 1 mini-language :D
+# Lab 1 mini-language \(◦'⌣'◦)/
 Model program: C++
 
 
