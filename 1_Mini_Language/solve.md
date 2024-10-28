@@ -3,12 +3,12 @@ Model program: C++
 
 
 Contains:
-- 2 simple data types and a user-defined type
+- 2 simple data types and a user-defined type : ``` (int, char, string, struct) ```
 - statements
 - assignment
-- input/output
-- conditional
-- loop
+- input/output ``` cin, cout ```
+- conditional ``` if else ```
+- loop ``` while ```
 - some condition on the way the identifiers and constants can be formed
 
 ## a) Mini-language specification
@@ -31,24 +31,47 @@ Contains:
     <reserved_words> := int | string | struct | char | if | else | while
   
     <id> := <letter> | <letter><string>
-
+```
+  String & Char
+```
     <string> := <char><string> | <char>
     <char> := <letter> | <digit> | <underline_chr>
-
+```
+  Integer
+```
     <number> := <nonzero_digit><number_body> | <nonzero_digit>
     <number_body> := <digit><number_body> | <digit>
     <integer> := <number> | -<number> | +<number>
-    
-    <int_var> := int <id>;
-    <int_val> := <int_var>=<integer>;
+```
+Declarations 
+```
+    <declaration> := <int_decl> | <str_decl> | <chr_decl> | <struct_decl>
 
-    <str_var> := string <id>;
-    <str_val> := <str_var>="<string>";
+    <int_var> := int <id>
+    <int_const> := <integer>
+    <int_decl> := <int_var>; | <int_var>=<int_const>; 
 
-    <chr_var> := char <id>;
-    <chr_val> := <chr_var>='<char>';
+    <str_var> := string <id>
+    <str_cont> := "<string>"
+    <str_decl> := <str_var>; | <str_var>=<str_const>;
 
-    <struct_var> := struct { <declaration_block> } id;
+    <chr_var> := char <id>
+    <chr_const> := '<char>'
+    <chr_decl> := <chr_var>; | <chr_var>=<chr_const>;
+
+    <const> := <int_const> | <str_const> | <chr_const>
+    <assignment> := <id>=<assignment_val>;
+    <assignment_val> := <const> | <operation>
+
+    <struct_decl> := struct { <declaration_block> } <id>;
+
+```
+    Operations
+```
+    <operand> :=  <id> | <const> 
+  
+    <ari_operation> := <operand> | <arithmetic_operator><operation>
+
 ```
 
     
