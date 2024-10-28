@@ -207,8 +207,12 @@ Statements:
   * loop: while (condition) { ... }
 
 Program Structure: 
-  int main() { code block }
+  int main() 
+  { 
+  code block 
+  }
 
+### Program example
 
 ```c++
   int main()
