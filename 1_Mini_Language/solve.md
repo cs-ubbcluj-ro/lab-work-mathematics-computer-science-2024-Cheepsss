@@ -137,7 +137,7 @@ Contains:
 ```
 
 ## b) small program
-    find natural odd numbers less than n given as input and then print them;
+  Find natural odd numbers less than n and print them. N - given as input
 ``` c++
   int main(){
     int n;
