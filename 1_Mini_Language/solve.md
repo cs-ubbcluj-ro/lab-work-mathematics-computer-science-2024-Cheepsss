@@ -163,7 +163,8 @@ Contains:
 nu stiu ce sa pun in docomentatie
 
 ```c++
-  int main(){
+  int main()
+  {
     <code_block>
   }
 ```
@@ -171,6 +172,7 @@ nu stiu ce sa pun in docomentatie
     int main(){
     int n; //instruction
     <code_block>
+    }
 ```
 ```c++
 int main(){
