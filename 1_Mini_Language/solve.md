@@ -165,31 +165,30 @@ nu stiu ce sa pun in docomentatie
 ```c++
   int main()
   {
-    <code_block>
+    //<code_block>
   }
 ```
 ```c++
     int main(){
     int n; //instruction
-    <code_block>
+    //<code_block>
     }
 ```
 ```c++
 int main(){
-    int n; //declaration block
-    cout<<"Please enter n:"<<"\n"; //instrucion
-    cin>>n; // instruction
+    <declaration_block> //->declaration
+    <instruction_block> //-> <instruction><instruction_block> -> <ins><ins><instruction_block> -> <ins><ins><ins>
     if(n<0) // instrucion
     {
-      <code_block>
+      //<code_block>
     }
     while(n>0) //instruction
     {
       if(n%2==1) //instruction
       {
-        <code_block>
+        //<code_block>
       }
-      n = n/2; <declaration_block>
+      <declaration_block> // -> declaration
     }
   }
 ```
