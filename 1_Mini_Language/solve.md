@@ -16,42 +16,55 @@ Contains:
   Alphabet
   ```
     * <letter> := <lwr_letter> | <upr_letter>
-    * <lwr_letter> := a | b | c | d | ... | z
-    * <upr_letter> := A | B | C | D | ... | Z
-    * <nonzero_digit> := 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 
-    * <digit> := 0 | <nonzero_digit>
-    * <underline_chr> := _
+    * <lwr_letter> ::= "a" | "b" | "c" | "d" | ... | "z"
+    * <upr_letter> ::= "A" | "B" | "C" | "D" | ... | "Z"
+    * <nonzero_digit> ::= "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" 
+    * <digit> ::= "0" | <nonzero_digit>
+    * <underline_chr> ::= "_"
 ```
   Lexic
 ```
-    <cond_operator> := < | <= | > | >= | == | != 
-    <arithmetic_operator> := + | - | * | /
-    <logic_operator> := ^ | | | << 
-    <separators> := [ | ] | { | }  |( | ) | ; | space 
-    <reserved_words> := int | string | struct | char | if | else | while
+    <cond_operator> ::= "<" | "<=" | ">" | ">=" | "==" | "!=" 
+    <ari_operator> ":= "+" | "-" | "*" | "/"
+    <logic_operator> ::= "^" | "|" | "<<"
+    <separators> ::= "[" | "]" | "{" | "}"  | "(" | ")" | ";" | " " 
+    <reserved_words> ::= "int" | "string" | "struct" | "char" | "if" | "else" | "while"
   
-    <id> := <letter> | <letter><string>
+    <id> ::= <letter> | <letter><string>
 ```
   String & Char
 ```
-    <string> := <char><string> | <char>
-    <char> := <letter> | <digit> | <underline_chr>
+    <string> ::= <char><string> | <char>
+    <char> ::= <letter> | <digit> | <underline_chr>
 ```
   Integer
 ```
-    <number> := <nonzero_digit><number_body> | <nonzero_digit>
-    <number_body> := <digit><number_body> | <digit>
-    <integer> := <number> | -<number> | +<number>
+    <number> ::= <nonzero_digit><number_body> | <nonzero_digit>
+    <number_body> ::= <digit><number_body> | <digit>
+    <integer> ::= <number> | "-"<number> | "+"<number>
+```
+  Operation
+```
+    <nostr_operand> :=  <id> | <chr_const> | <int_const>
+    <operand> := <id> | <const>
+
+    <val_operator> := <ari_operator> | <logic_operator>
+    <val_operation> := <nostr_operand><ari_op_body>
+    <val_op_body> := <val_operator><nostr_operand><ari_op_body>|<val_operator><nostr_operand>
+
+    <logic_operation> := <operand><logic_op_body>
+    <logic_op_body> := <logic_operator><operand><logic_op_body>|<logic_operator><operand>
 ```
 Declarations 
 ```
     <declaration> := <int_decl> | <str_decl> | <chr_decl> | <struct_decl>
-
+    <declaration_block> := <declaration> | <declaration><declaration_block>
+    
     <int_var> := int <id>
     <int_const> := <integer>
-    <int_decl> := <int_var>; | <int_var>=<int_const>; 
+    <int_decl> := <int_var>; | <int_var>=<int_const>;
 
-    <str_var> := string <id>
+    <str_var> := char * <id>
     <str_cont> := "<string>"
     <str_decl> := <str_var>; | <str_var>=<str_const>;
 
@@ -66,15 +79,7 @@ Declarations
     <struct_decl> := struct { <declaration_block> } <id>;
 
 ```
-    Operations
-```
-    <operand> :=  <id> | <const> 
-  
-    <ari_operation> := <operand> | <arithmetic_operator><operation>
 
-```
-
-    
     
 
 
