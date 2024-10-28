@@ -170,14 +170,15 @@ nu stiu ce sa pun in docomentatie
 ```
 ```c++
     int main(){
-    int n; //instruction
-    //<code_block>
+    //<declaration_block> 
+    //<code_block> --> <instruction_block> or <declaration _blocks>
+    
     }
 ```
 ```c++
 int main(){
-    <declaration_block> //->declaration
-    <instruction_block> //-> <instruction><instruction_block> -> <ins><ins><instruction_block> -> <ins><ins><ins>
+    //<declaration_block> ->declaration
+    //<instruction_block> -> <instruction><instruction_block> -> <ins><ins><instruction_block> -> <ins><ins><ins>
     if(n<0) // instrucion
     {
       //<code_block>
@@ -188,7 +189,7 @@ int main(){
       {
         //<code_block>
       }
-      <declaration_block> // -> declaration
+      //<declaration_block> -> declaration
     }
   }
 ```
