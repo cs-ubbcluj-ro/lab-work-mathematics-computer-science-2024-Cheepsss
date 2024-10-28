@@ -160,7 +160,6 @@ Contains:
 
 ## DOCUMENTATION  
 ![image](https://github.com/user-attachments/assets/35edcaa2-2c5a-40cb-96e6-e2f3bceb855c)
-nu stiu ce sa pun in documentatie
 
 Mini-Language Specification Documentation
 
