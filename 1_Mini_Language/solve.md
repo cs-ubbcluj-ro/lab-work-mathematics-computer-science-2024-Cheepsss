@@ -259,7 +259,7 @@ int main(){
       {
         cout<<n<<"\n"; //instruction
       }
-      n = n/2;  //declaration
+      n = n-1;  //declaration
     }
   }
 ```
@@ -279,7 +279,7 @@ int main(){
       {
         cout<<n<<"\n"; //<instruction> -> <cout> ->cout<< <id><cout_add> ->  cout<<n<< <enter>; -> cout<<n<<\n";
       }
-      n = n/2;  //<declaration> -> <assignment_existing> -> <id>=<operation> -> n=<id><operator><constant>-> n=n/2
+      n = n-1;  //<declaration> -> <assignment_existing> -> <id>=<operation> -> n=<id><operator><constant>-> n=n/2
     }
   }
 ```
