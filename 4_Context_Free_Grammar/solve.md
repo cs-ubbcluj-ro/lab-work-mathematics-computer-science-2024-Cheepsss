@@ -36,7 +36,9 @@ T = {
     "^", "|", "<<",                      
     "[", "]", "{", "}", "(", ")", ";", " ", // Separators
     "int", "string", "struct", "char", "if", "else", "while", 
-    "cin>>", "cout<<", "\"", "'", "="  
+    "cin>>", "cout<<", "\"", "'", "="
+}
+S = <Start>
 
 ```
 
@@ -160,10 +162,10 @@ T = {
 ```
   Program
 ```
-    <cin> → "cin>>" <id> ";"
-    <cout> → "cout<<" <cout_add> ";"
-    <cout_add> → <cout_val> | <cout_val> "<<" <cout_add>
-    <cout_val> → <operation> | <id> | <const> | <if_statement> | <enter>
+        <library_decl> ::= ... | ε
+    <namespace_decl> ::= ... | ε
+    ...
+    <Start> ::= "int main(){"<code_block>"}"
 
 ```
 
