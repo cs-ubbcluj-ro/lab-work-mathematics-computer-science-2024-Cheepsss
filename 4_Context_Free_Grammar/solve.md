@@ -126,6 +126,53 @@
 
 ```
 
+# DOCUMENTATION
+
+Overview: a simplified verion of c++
+
+### Alphabet:
+
+letters a-z
+A-Z
+digits
+0-9
+special charactes: "_", "\n"
+
+### Lexical Rules:
+
+operators: < <= > >= == != && || ! + - * / % ^ | <<
+separators: [ ] { } ( ) ; " "
+reserved words: int, string, struct, char, if, else, while
+identifiers: start with a letter, followed by letters, digits, or underscores
+
+### Data Types:
+
+int - integer
+char - single character string - sequence of characters
+Constants:
+
+integer: positive or negative whole numbers
+string: with characters a-z, A-Z, 0-9, _
+char: single character
+array? array of integers, strings or characters of the form {e1, e2 .. }
+Array: Declared with brackets int arr[10] Accessed with brackets arr[0]
+
+### Operator:
+
+arithmetic: +, -, *, /, %
+conditionals: < <= > >= == !=
+logical: &&, ||, !
+bitwise: ^, |, <<
+
+### Statements:
+
+declaration: data type followed by identifier or direct assignment
+assignment: var=value;
+input: cin<<var; O
+output: cout>>value;
+conditional: if (condition) { ... } else { ... }
+loop: while (condition) { ... }
+Program Structure: int main() { code block }
 
 
 
