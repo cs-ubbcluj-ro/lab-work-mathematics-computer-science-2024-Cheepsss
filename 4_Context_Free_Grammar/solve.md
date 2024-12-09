@@ -1,6 +1,47 @@
 # Lab 4
 
-### Language specification:
+### Theory
+Context Free Grammar is formal grammar, the syntax or structure of a formal language can be described using context-free grammar (CFG), a type of formal grammar. The grammar has four tuples: (V,T,P,S).
+V - It is the collection of variables or non-terminal symbols.
+T - It is a set of terminals. 
+P - It is the production rules that consist of both terminals and non-terminals.
+S - It is the starting symbol.
+
+```
+V = {
+    <letter>, <lwr_letter>, <upr_letter>, <digit>, <nonzero_digit>, <underline_chr>, <enter>, 
+    <cond_operator>, <if_operator>, <not_operator>, <ari_operator>, <logic_operator>, 
+    <separators>, <reserved_words>, <id>, 
+    <string>, <char>, 
+    <number>, <number_body>, <integer>, 
+    <operand>, <condition>, <add_cond_r>, <add_cond_l>, <enclose>, <add_enclose_r>, <add_enclose_l>, <if_statement>, <operation>, <add_operation>, 
+    <declaration_block>, <int_var>, <int_const>, <str_var>, <str_cont>, <chr_var>, <chr_const>, <decl_var_no_array>, <const_no_array>, <array_access>, <array_var>, <array_const>, <array_const_body>, <array_assignment>, <decl_var>, <const>, <assignment>, <assignment_val>, <assignment_and_decl>, <assignment_existing>, <struct_decl>, <declaration>, 
+    <cin>, <cout>, <cout_add>, <cout_val>, 
+    <if>, 
+    <while>, 
+    <instruction>, <instruction_block>, 
+    <code>, <code_block>, 
+    <library_decl>, <namespace_decl>, 
+    <Start>
+}
+
+T = {
+    "a", "b", ..., "z", "A", "B", ..., "Z", 
+    "0", "1", ..., "9",                   
+    "_", "\n",                            
+    "<", "<=", ">", ">=", "==", "!=",     
+    "||", "&&",                           
+    "!",                                  
+    "+", "-", "*", "/", "%",             
+    "^", "|", "<<",                      
+    "[", "]", "{", "}", "(", ")", ";", " ", // Separators
+    "int", "string", "struct", "char", "if", "else", "while", 
+    "cin>>", "cout<<", "\"", "'", "="  
+
+```
+
+
+### Language specification and production rules:
   Alphabet
   ```
     <letter> → <lwr_letter> | <upr_letter>
