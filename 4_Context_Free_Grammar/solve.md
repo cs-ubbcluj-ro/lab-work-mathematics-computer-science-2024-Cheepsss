@@ -111,18 +111,19 @@
 ```
   Code block
 ```
-  <instruction> ::= <if> | <while> | <cin> | <cout>
-  <instruction_block> ::= <instrucion> <instruction_block> | <instruction>
+  <instruction> → <if> | <while> | <cin> | <cout>
+  <instruction_block> → <instrucion> <instruction_block> | <instruction>
 
-  <code> ::= <instruction_block> | <declaration_block>
-  <code_block> ::= <code><code_block> | <code>
+  <code> → <instruction_block> | <declaration_block>
+  <code_block> → <code><code_block> | <code>
 ```
   Program
 ```
-    <library_decl> ::= ... | ε
-    <namespace_decl> ::= ... | ε
-    ...
-    <Start> ::= "int main(){"<code_block>"}"
+    <cin> → "cin>>" <id> ";"
+    <cout> → "cout<<" <cout_add> ";"
+    <cout_add> → <cout_val> | <cout_val> "<<" <cout_add>
+    <cout_val> → <operation> | <id> | <const> | <if_statement> | <enter>
+
 ```
 
 
