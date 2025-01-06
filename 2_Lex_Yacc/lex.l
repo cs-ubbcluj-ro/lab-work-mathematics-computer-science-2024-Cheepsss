@@ -1,74 +1,74 @@
 %{
+#include "y.tab.h"
 #include <stdio.h>
-#include "symbol_table.h"   
-#include "pif.h"        
-
-extern int add_to_symbol_table(char *token);
-extern void add_to_pif(const char *token, int index);
+#include <stdlib.h>
+#include <string.h>
 %}
 
-%%
-
-"int"         { add_to_pif("int", -1); }
-"while"       { add_to_pif("while", -1); }
-"string"      { add_to_pif("str", -1); }
-"struct"      { add_to_pif("struct", -1); }
-"cin"         { add_to_pif("cin", -1); }
-"cout"        { add_to_pif("cout", -1); }
-"main"        { add_to_pif("main", -1);}
-
-"="           { add_to_pif("=", -1); }
-"<"           { add_to_pif("<", -1); }
-"+"           { add_to_pif("+", -1); }
-";"           { add_to_pif(";", -1); }
-"{"           { add_to_pif("{", -1); }
-"}"           { add_to_pif("}", -1); }
-"("           { add_to_pif("(", -1); }
-")"           { add_to_pif(")", -1); }
-"<<"          { add_to_pif("<<", -1); }
-">>"          { add_to_pif(">>", -1); }
-
--?[1-9][0-9]*        {
-                int index = add_to_symbol_table(yytext); 
-                add_to_pif("int_c", index);
-              }
-
-\"[^\"]*\"    { 
-                int index = add_to_symbol_table(yytext); 
-                add_to_pif("str_c", index);
-                // [^\"] sa nu fie "
-              }
-
-[a-zA-Z_][a-zA-Z0-9_]* {
-                int index = add_to_symbol_table(yytext); 
-                add_to_pif("ID", index);
-              }
-
-[ \t]+        { }
-\n            { }
-
-.             { printf("Lexical error at line %d: %s\n", yylineno, yytext); }
+DIGIT       [0-9]
+LETTER      [a-zA-Z]
+ID          {LETTER}({LETTER}|{DIGIT}|_)*
+STRING      \"[^\"]*\"
+WHITESPACE  [ \t\n]+
 
 %%
 
-int main(int argc, char *argv[]) {
-    init_symbol_table();
-    init_pif();
+"int"       { printf("Token: INT, Value: %s\n", yytext); return INT; }
+"string"    { printf("Token: STRING, Value: %s\n", yytext); return STRING; }
+"struct"    { printf("Token: STRUCT, Value: %s\n", yytext); return STRUCT; }
+"main"      { printf("Token: MAIN, Value: %s\n", yytext); return MAIN; }
+"if"        { printf("Token: IF, Value: %s\n", yytext); return IF; }
+"else"      { printf("Token: ELSE, Value: %s\n", yytext); return ELSE; }
+"while"     { printf("Token: WHILE, Value: %s\n", yytext); return WHILE; }
+"cin>>"     { printf("Token: CIN, Value: %s\n", yytext); return CIN; }
+"cout<<"    { printf("Token: COUT, Value: %s\n", yytext); return COUT; }
 
-    if (argc > 1) {
-        FILE *file = fopen(argv[1], "r");
-        if (!file) {
-            perror("Could not open source file");
-            return 1;
-        }
-        yyin = file;
-    }
-    
-    yylex(); // Perform lexical analysis
+"{"         { printf("Token: LBRACE, Value: %s\n", yytext); return LBRACE; }
+"}"         { printf("Token: RBRACE, Value: %s\n", yytext); return RBRACE; }
+"("         { printf("Token: LPAREN, Value: %s\n", yytext); return LPAREN; }
+")"         { printf("Token: RPAREN, Value: %s\n", yytext); return RPAREN; }
+";"         { printf("Token: SEMICOLON, Value: %s\n", yytext); return SEMICOLON; }
+"="         { printf("Token: ASSIGN, Value: %s\n", yytext); return ASSIGN; }
+"+"         { printf("Token: '+', Value: %s\n", yytext); return '+'; }
+"-"         { printf("Token: '-', Value: %s\n", yytext); return '-'; }
+"*"         { printf("Token: '*', Value: %s\n", yytext); return '*'; }
+"/"         { printf("Token: '/', Value: %s\n", yytext); return '/'; }
+"%"         { printf("Token: '', Value: %s\n", yytext); return '%'; }
+"<"         { printf("Token: '<', Value: %s\n", yytext); return '<'; }
+">"         { printf("Token: '>', Value: %s\n", yytext); return '>'; }
+"=="        { printf("Token: EQ, Value: %s\n", yytext); return EQ; }
+"!="        { printf("Token: NE, Value: %s\n", yytext); return NE; }
+"&&"        { printf("Token: AND, Value: %s\n", yytext); return AND; }
+"||"        { printf("Token: OR, Value: %s\n", yytext); return OR; }
 
-    // Print PIF and Symbol Table
-    print_pif();
-    print_symbol_table();
+{DIGIT}+ {
+    yylval.iVal = atoi(yytext);
+    printf("Token: INTEGER_CONST, Value: %s\n", yytext);
+    return INTEGER_CONST;
+}
 
-    return 0;
+{STRING} {
+    yylval.sVal = strdup(yytext);
+    printf("Token: STRING_CONST, Value: %s\n", yytext);
+    return STRING_CONST;
+}
+
+{ID} {
+    yylval.sVal = strdup(yytext);
+    printf("Token: ID, Value: %s\n", yytext);
+    return ID;
+}
+
+{WHITESPACE} {
+    // Ignore whitespaces
+}
+
+. {
+    printf("Lexical error: unrecognized token %s\n", yytext);
+}
+
+%%
+
+int yywrap() {
+    return 1;
 }

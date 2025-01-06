@@ -1,7 +1,4 @@
-#!/bin/sh
-
-#pt instalare: sudo apt install flex
-lex lex.l
-gcc lex.yy.c pif.c symbol_table.c -o scanner -ll
-chmod +x scanner
-./scanner test.cpp
+flex lex.l
+yacc -Wcounterexamples -d minilang.y
+gcc lex.yy.c y.tab.c -o minilang
+./minilang < test.c
